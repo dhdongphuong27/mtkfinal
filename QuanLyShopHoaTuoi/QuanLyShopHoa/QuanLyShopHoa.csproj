@@ -51,8 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractFactory.cs" />
+    <Compile Include="Account.cs" />
     <Compile Include="BanhFlanDecorator.cs" />
+    <Compile Include="Bonus.cs" />
     <Compile Include="CaPhe.cs" />
+    <Compile Include="CloseAccount.cs" />
+    <Compile Include="Combo2.cs" />
+    <Compile Include="Combo.cs" />
+    <Compile Include="Combo1.cs" />
+    <Compile Include="Combo3.cs" />
+    <Compile Include="Combo4.cs" />
+    <Compile Include="Combo5.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CongThucTinhTien.cs" />
     <Compile Include="DAO\ChiTietNHDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
@@ -62,6 +73,8 @@
     <Compile Include="DAO\NhanVienDAO.cs" />
     <Compile Include="DAO\NhapHangDAQ.cs" />
     <Compile Include="DAO\ThongKeDAO.cs" />
+    <Compile Include="DetailPaymentChange.cs" />
+    <Compile Include="Discount.cs" />
     <Compile Include="EISingletonLogger.cs" />
     <Compile Include="FactoryNhanVien.cs" />
     <Compile Include="Form1.cs">
@@ -69,6 +82,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="frmHD.cs">
       <SubType>Form</SubType>
@@ -118,21 +137,31 @@
     <Compile Include="KemMuoiDecorator.cs" />
     <Compile Include="KemPhoMaiDecorator.cs" />
     <Compile Include="KhongGiam.cs" />
+    <Compile Include="LauchCombo.cs" />
     <Compile Include="MaGiamGia.cs" />
     <Compile Include="NhanVienChinhThuc.cs" />
     <Compile Include="NhanVienPhaiCu.cs" />
     <Compile Include="NhanVienThoiVu.cs" />
     <Compile Include="NuocChanh.cs" />
     <Compile Include="NuocEpTraiCay.cs" />
+    <Compile Include="Observer.cs" />
+    <Compile Include="ObserverHangHoa.cs" />
+    <Compile Include="OpenAccount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PuddingKhoaiMonDecorator.cs" />
     <Compile Include="PuddingTrungDecorator.cs" />
+    <Compile Include="Remote.cs" />
+    <Compile Include="SaveAsCSV.cs" />
+    <Compile Include="SaveAsTXT.cs" />
+    <Compile Include="SaveToFile.cs" />
     <Compile Include="SuaTuoi.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="ThachNhoDecorator.cs" />
     <Compile Include="ThachPhoMaiDecorator.cs" />
     <Compile Include="ThachTraiCayDecorator.cs" />
     <Compile Include="ThachTraXanhDecorator.cs" />
+    <Compile Include="ThucAn.cs" />
     <Compile Include="ThucUong.cs" />
     <Compile Include="ToppingDecorator.cs" />
     <Compile Include="TraDa.cs" />
@@ -141,8 +170,17 @@
     <Compile Include="TranChauTrangDecorator.cs" />
     <Compile Include="TraSua.cs" />
     <Compile Include="TraTao.cs" />
+    <Compile Include="WeekendBonus.cs" />
+    <Compile Include="Weekend.cs" />
+    <Compile Include="WeekendDiscount.cs" />
+    <Compile Include="Yearend.cs" />
+    <Compile Include="YearendBonus.cs" />
+    <Compile Include="YearendDiscount.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHD.resx">
       <DependentUpon>frmHD.cs</DependentUpon>

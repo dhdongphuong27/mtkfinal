@@ -28,6 +28,7 @@ namespace QuanLyShopHoa
             {
                 btnUpdateTK.Visible = false;
                 btnLog.Visible = false;
+                btnLogCsv.Visible = false;
                 ThongKeDAO.Instance.InsertTK(DateTime.Now);
                 txtNgayTK.Text = DateTime.Today.ToString("yyyy-MM-dd");
                 month = DateTime.Today.Month;
@@ -40,6 +41,7 @@ namespace QuanLyShopHoa
             {
                 btnAddTK.Visible = false;
                 btnLog.Visible = false;
+                btnLogCsv.Visible = false;
                 month = int.Parse(DataProvider.Instance.ExcuteScalar("SELECT MONTH(NgayTK) FROM thongke WHERE ID =" + int.Parse(frmMain.MaTK)));
                 year = int.Parse(DataProvider.Instance.ExcuteScalar("SELECT YEAR(NgayTK) FROM thongke WHERE ID =" + int.Parse(frmMain.MaTK)));
                 try
@@ -192,8 +194,17 @@ namespace QuanLyShopHoa
         {
             EISingletonLogger logger = EISingletonLogger.GetLogger();
             String message = "Mã thống kê: " + txtMaTK.Text + "\nNgày thống kê: " + txtNgayTK.Text + "\nThu: " + txtThu.Text + "\nChi: " + txtChi.Text + "\nDoanh Thu: " + txtDoanhThu.Text;
-            logger.WriteMessage(message, txtNgayTK.Text);
+            
+            logger.WriteMessage(message, txtNgayTK.Text, "txt");
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EISingletonLogger logger = EISingletonLogger.GetLogger();
+            String message = "Mã thống kê: " + txtMaTK.Text + "\nNgày thống kê: " + txtNgayTK.Text + "\nThu: " + txtThu.Text + "\nChi: " + txtChi.Text + "\nDoanh Thu: " + txtDoanhThu.Text;
+
+            logger.WriteMessage(message, txtNgayTK.Text, "csv");
         }
     }
 }

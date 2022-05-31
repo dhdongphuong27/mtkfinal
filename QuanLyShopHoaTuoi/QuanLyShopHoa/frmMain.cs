@@ -68,7 +68,7 @@ namespace QuanLyShopHoa
         //Hiển thị dữ liệu của trang "Nhân viên"
         public void LoadNV()
         {
-            string query = "SELECT MaNV, Hoten, Gioi, ChucVu FROM nhanvien";
+            string query = "SELECT MaNV, Hoten, TrangThai, ChucVu FROM nhanvien";
             try
             {
                 dgvNV.DataSource = DataProvider.Instance.ExcuteQuery(query);
@@ -539,6 +539,45 @@ namespace QuanLyShopHoa
         {
             Form1 frmtu = new Form1();
             frmtu.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form2 frmcb = new Form2();
+            frmcb.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MaNV == "")
+            {
+                MessageBox.Show("Nhân viên không tồn tại");
+            }
+            else
+            {
+                Account acc = new Account(MaNV);
+                Remote rm = new Remote(new OpenAccount(acc), new CloseAccount(acc));
+                rm.clickOpenAccount();
+
+
+                LoadNV();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (MaNV == "")
+            {
+                MessageBox.Show("Nhân viên không tồn tại");
+            }
+            else
+            {
+                Account acc = new Account(MaNV);
+                Remote rm = new Remote(new OpenAccount(acc), new CloseAccount(acc));
+                rm.clickCloseAcc();
+
+                LoadNV();
+            }
         }
     }
 }

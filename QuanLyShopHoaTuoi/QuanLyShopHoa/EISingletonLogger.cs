@@ -16,21 +16,22 @@ namespace QuanLyShopHoa
         {
             return _logger;
         }
-        public void WriteMessage(string message, string date)
+        public void WriteMessage(string message, string date, string type)
         {
             date = date.Replace("/", "-");
-            string exeFile = (new System.Uri(System.Reflection.Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
-            string exeDir = Path.GetDirectoryName(exeFile);
-            string path = exeDir + "\\Logs\\" + date + ".txt";
-            StreamWriter sw;
-            System.IO.Directory.CreateDirectory(exeDir + "\\Logs");
+            SaveAsTXT sat = new SaveAsTXT();
+            if (type == "txt")
+            {  
+                sat.WriteMessage(message, date + ".txt");
+            }else if (type == "csv")
+            {
+                SaveToFile saveCSV = new SaveAsCSV(sat);
+                saveCSV.WriteMessage(message, date + ".txt");
+            }
+            
+            
 
-            if (!File.Exists(path))
-                sw = File.CreateText(path);
-            else
-                sw = new StreamWriter(path, true);
-            sw.WriteLine(message + "\n");
-            sw.Close();
+
         }
     }
 }

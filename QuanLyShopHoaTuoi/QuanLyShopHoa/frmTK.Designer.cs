@@ -42,6 +42,7 @@
             this.txtChi = new System.Windows.Forms.TextBox();
             this.txtDoanhThu = new System.Windows.Forms.TextBox();
             this.btnLog = new System.Windows.Forms.Button();
+            this.btnLogCsv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -167,19 +168,33 @@
             this.btnLog.AutoSize = true;
             this.btnLog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLog.Location = new System.Drawing.Point(224, 257);
+            this.btnLog.Location = new System.Drawing.Point(224, 248);
             this.btnLog.Name = "btnLog";
-            this.btnLog.Size = new System.Drawing.Size(118, 27);
+            this.btnLog.Size = new System.Drawing.Size(124, 27);
             this.btnLog.TabIndex = 16;
-            this.btnLog.Text = "Lưu thành file";
+            this.btnLog.Text = "Lưu thành *.txt";
             this.btnLog.UseVisualStyleBackColor = true;
             this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
+            // btnLogCsv
+            // 
+            this.btnLogCsv.AutoSize = true;
+            this.btnLogCsv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogCsv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogCsv.Location = new System.Drawing.Point(224, 281);
+            this.btnLogCsv.Name = "btnLogCsv";
+            this.btnLogCsv.Size = new System.Drawing.Size(131, 27);
+            this.btnLogCsv.TabIndex = 17;
+            this.btnLogCsv.Text = "Lưu thành *.csv";
+            this.btnLogCsv.UseVisualStyleBackColor = true;
+            this.btnLogCsv.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmTK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 326);
+            this.Controls.Add(this.btnLogCsv);
             this.Controls.Add(this.btnLog);
             this.Controls.Add(this.txtDoanhThu);
             this.Controls.Add(this.txtChi);
@@ -218,5 +233,6 @@
         private System.Windows.Forms.TextBox txtChi;
         private System.Windows.Forms.TextBox txtDoanhThu;
         private System.Windows.Forms.Button btnLog;
+        private System.Windows.Forms.Button btnLogCsv;
     }
 }

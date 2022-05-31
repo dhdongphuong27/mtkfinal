@@ -13,6 +13,7 @@ namespace QuanLyShopHoa
 {
     public partial class frmHD : Form
     {
+        Subject subject = new Subject();
         public frmHD()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace QuanLyShopHoa
         private void frmHD_Load(object sender, EventArgs e)
         {
             loaiGiamGiaComboBox.SelectedIndex = 0;
+            dotGiamGiaComboBox.SelectedIndex = 0;
             if (isMainButton == "themhd")
             {
                 try
@@ -100,9 +102,13 @@ namespace QuanLyShopHoa
                     float thanhtien = gia * sl;
 
                     DonHangDAO.Instance.InsertDH(sohd, mahh, tenhh, gia, sl, thanhtien);
-                    
-                    string query = "UPDATE hanghoa SET SL = SL -" + sl + " WHERE MaHH = '" + mahh + "'";
-                    DataProvider.Instance.ExcuteNonQuery(query);
+                    DetailPaymentChange dpc = new DetailPaymentChange(mahh, sl);
+                    Observer observerHH = new ObserverHangHoa(dpc);
+                    subject.Attach(observerHH);
+                    //subject.Attach(new Observer(new DetailPaymentChange(mahh, sl));
+                    //string query = "UPDATE hanghoa SET SL = SL -" + sl + " WHERE MaHH = '" + mahh + "'";
+                    //DataProvider.Instance.ExcuteNonQuery(query);
+
                     dgvDonHang.DataSource = DataProvider.Instance.ExcuteQuery("SELECT MaHH, TenHH, DonGia, SL, ThanhTien FROM donhang WHERE SoHD = " + txtSoHD.Text);
                     
                 }
@@ -124,7 +130,9 @@ namespace QuanLyShopHoa
                 try
                 {
                     string id = MaHH;
+                    
                     DonHangDAO.Instance.DeleteDH(id);
+                    subject.Detach(id);
                     dgvDonHang.DataSource = DataProvider.Instance.ExcuteQuery("SELECT MaHH,TenHH,DonGia,SL,ThanhTien FROM hanghoa WHERE SoHD = " + int.Parse(txtSoHD.Text));
                 }
                 catch (Exception) { }            
@@ -162,6 +170,7 @@ namespace QuanLyShopHoa
         {
             try
             {
+                subject.Excute();
                 DataProvider.Instance.ExcuteNonQuery("UPDATE hoadon SET TongTien = " + tvTongTien.Text + ", SauGiam = "+ tvSauGiam.Text + " WHERE SoHD = " + txtSoHD.Text);
                 this.Hide();
             }
@@ -209,10 +218,17 @@ namespace QuanLyShopHoa
         private void button1_Click(object sender, EventArgs e)
         {
             int sohd = int.Parse(txtSoHD.Text);
+
             string tongtien = DataProvider.Instance.ExcuteScalar("SELECT SUM(ThanhTien) FROM donhang WHERE SoHD = " + sohd);
+
+
+            
+
             MaGiamGia maGiamGia = new MaGiamGia(float.Parse(tongtien), float.Parse(txtMucGiam.Text));
+   
 
             int index = loaiGiamGiaComboBox.SelectedIndex;
+
             switch (index)
             {
                 case 0:
@@ -238,6 +254,41 @@ namespace QuanLyShopHoa
         private void label11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void loaiGiamGiaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index1 = dotGiamGiaComboBox.SelectedIndex;
+            AbstractFactory promotion;
+            Discount d = new Weekend().Discount();// gán tạm
+            bool flag = false;
+            switch (index1)
+            {
+                case 0:
+                    loaiGiamGiaComboBox.SelectedIndex = 0;
+                    txtMucGiam.Text = 0.ToString();
+                    break;
+                case 1:
+                    promotion = new Weekend();
+                    d = promotion.Discount();
+                    flag = true;
+                    break;
+                case 2:
+                    promotion = new Yearend();
+                    d = promotion.Discount();
+                    flag = true;
+                    break;
+            }
+            if (flag == true)
+            {
+                loaiGiamGiaComboBox.SelectedIndex = d.LoaiGiamGia();
+                txtMucGiam.Text = d.MucGiamGia().ToString();
+            }
         }
     }
 }
