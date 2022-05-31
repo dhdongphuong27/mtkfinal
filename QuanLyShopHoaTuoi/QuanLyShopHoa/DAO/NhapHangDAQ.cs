@@ -16,7 +16,7 @@ namespace QuanLyShopHoa.DAO
         }
         public bool InsertNH(int id, DateTime date)
         {
-            string query = string.Format("INSERT into nhaphang (MaNH,NgayNH) VALUES ("+id+ ",NOW()");
+            string query = string.Format("INSERT into nhaphang (NgayNH) VALUES (NOW())");
             int result = DataProvider.Instance.ExcuteNonQuery(query);
 
             return result > 0;

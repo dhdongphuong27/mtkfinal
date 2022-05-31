@@ -124,7 +124,7 @@ namespace QuanLyShopHoa
         //Hiển thị giao diện của trang"Hóa đơn"
         public void LoadHD()
         {
-            string query = "SELECT SoHD, NgayLap, TongTien FROM hoadon";
+            string query = "SELECT SoHD, NgayLap, SauGiam FROM hoadon";
             try
             {
                 dgvHD.DataSource = DataProvider.Instance.ExcuteQuery(query);
@@ -533,6 +533,12 @@ namespace QuanLyShopHoa
                 SoHD = dgvHD.Rows[e.RowIndex].Cells["clSoHD"].FormattedValue.ToString();
             }
             catch (Exception) { }        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form1 frmtu = new Form1();
+            frmtu.Show();
         }
     }
 }

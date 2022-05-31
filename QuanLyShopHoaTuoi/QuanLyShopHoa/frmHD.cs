@@ -22,6 +22,7 @@ namespace QuanLyShopHoa
         //Hiển thị giao diện dữ liệu tương ứng với sự kiện click ở giao diện chính (frmMain)
         private void frmHD_Load(object sender, EventArgs e)
         {
+            loaiGiamGiaComboBox.SelectedIndex = 0;
             if (isMainButton == "themhd")
             {
                 try
@@ -29,7 +30,7 @@ namespace QuanLyShopHoa
                     btnUpdateHD.Visible = false;
                     HoaDonDAO.Instance.InsertHD(DateTime.Now);
                     txtNgayHD.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                    txtSoHD.Text = DataProvider.Instance.ExcuteScalar("SELECT Max(SoHD) FROM HoaDon");
+                    txtSoHD.Text = DataProvider.Instance.ExcuteScalar("SELECT Max(SoHD) FROM hoadon");
                     txtSoHD.Enabled = false;
                     txtNgayHD.Enabled = false;
                     txtMaHH.Focus();
@@ -57,6 +58,8 @@ namespace QuanLyShopHoa
             if (isMainButton == "xemhd")
             {
                 pnEditHD.Visible = false;
+                btnThanhToan.Visible = false;
+                btnTinhTien.Visible = false;
                 try
                 {
                     DataTable dt = DataProvider.Instance.ExcuteQuery("SELECT * FROM hoadon WHERE SoHD = " + frmMain.SoHD);
@@ -67,6 +70,7 @@ namespace QuanLyShopHoa
                             txtSoHD.Text = dr["SoHD"].ToString();
                             txtNgayHD.Text = dr["NgayLap"].ToString();
                             tvTongTien.Text = dr["TongTien"].ToString() + " vnđ";
+                            tvSauGiam.Text = dr["SauGiam"].ToString() + " vnđ";
                         }
                     }
                     txtSoHD.Enabled = false;
@@ -95,14 +99,16 @@ namespace QuanLyShopHoa
                     int sl = int.Parse(txtSL.Text);
                     float thanhtien = gia * sl;
 
-                    if (DonHangDAO.Instance.InsertDH(sohd, mahh, tenhh, gia, sl, thanhtien))
-                    {
-                        string query = "UPDATE hanghoa SET SL -=" + sl + " WHERE MaHH = '" + mahh + "'";
-                        DataProvider.Instance.ExcuteNonQuery(query);
-                        dgvDonHang.DataSource = DataProvider.Instance.ExcuteQuery("SELECT MaHH, TenHH, DonGia, SL, ThanhTien FROM donhang WHERE SoHD = " + int.Parse(txtSoHD.Text));
-                    }
+                    DonHangDAO.Instance.InsertDH(sohd, mahh, tenhh, gia, sl, thanhtien);
+                    
+                    string query = "UPDATE hanghoa SET SL = SL -" + sl + " WHERE MaHH = '" + mahh + "'";
+                    DataProvider.Instance.ExcuteNonQuery(query);
+                    dgvDonHang.DataSource = DataProvider.Instance.ExcuteQuery("SELECT MaHH, TenHH, DonGia, SL, ThanhTien FROM donhang WHERE SoHD = " + txtSoHD.Text);
+                    
                 }
-                catch (Exception) { }               
+                catch (Exception ex){
+                    MessageBox.Show(ex.ToString());
+                }               
             }
         }
 
@@ -156,12 +162,12 @@ namespace QuanLyShopHoa
         {
             try
             {
-                int sohd = int.Parse(txtSoHD.Text);
-                string tongtien = DataProvider.Instance.ExcuteScalar("SELECT SUM(ThanhTien) FROM donhang WHERE SoHD = " + sohd);
-                DataProvider.Instance.ExcuteNonQuery("UPDATE hoadon SET TongTien = " + tongtien + " WHERE SoHD = " + sohd);
-                tvTongTien.Text = tongtien + " vnđ";
+                DataProvider.Instance.ExcuteNonQuery("UPDATE hoadon SET TongTien = " + tvTongTien.Text + ", SauGiam = "+ tvSauGiam.Text + " WHERE SoHD = " + txtSoHD.Text);
+                this.Hide();
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         //Cập nhật hóa đơn
@@ -193,6 +199,45 @@ namespace QuanLyShopHoa
                 MaHH = dgvDonHang.Rows[e.RowIndex].Cells["clMaHH"].FormattedValue.ToString();
             }
             catch (Exception) { }
+        }
+
+        private void txtSoHD_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int sohd = int.Parse(txtSoHD.Text);
+            string tongtien = DataProvider.Instance.ExcuteScalar("SELECT SUM(ThanhTien) FROM donhang WHERE SoHD = " + sohd);
+            MaGiamGia maGiamGia = new MaGiamGia(float.Parse(tongtien), float.Parse(txtMucGiam.Text));
+
+            int index = loaiGiamGiaComboBox.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    maGiamGia.SetCongThucTinhTien(new KhongGiam());
+                    break;
+                case 1:
+                    maGiamGia.SetCongThucTinhTien(new GiamPhanTram());
+                    break;
+                case 2:
+                    maGiamGia.SetCongThucTinhTien(new GiamTrucTiep());
+                    break;
+            }
+            float saugiam = maGiamGia.TinhTien();
+            tvTongTien.Text = tongtien;
+            tvSauGiam.Text = saugiam.ToString() ;
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

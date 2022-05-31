@@ -74,3 +74,4 @@ C:\Users\DMX\Desktop\Source\Source\QuanLyShopHoaTuoi\QuanLyShopHoa\obj\Debug\Qua
 C:\Users\DMX\Desktop\Source\Source\QuanLyShopHoaTuoi\QuanLyShopHoa\obj\Debug\QuanLyShopHoa.csproj.CopyComplete
 C:\Users\DMX\Desktop\Source\Source\QuanLyShopHoaTuoi\QuanLyShopHoa\obj\Debug\QuanLyShopHoa.exe
 C:\Users\DMX\Desktop\Source\Source\QuanLyShopHoaTuoi\QuanLyShopHoa\obj\Debug\QuanLyShopHoa.pdb
+C:\Users\DMX\Desktop\Source\Source\QuanLyShopHoaTuoi\QuanLyShopHoa\obj\Debug\QuanLyShopHoa.Form1.resources

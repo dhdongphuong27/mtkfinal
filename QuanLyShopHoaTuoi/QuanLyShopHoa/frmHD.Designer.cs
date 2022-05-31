@@ -34,6 +34,10 @@
             this.txtSoHD = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnEditHD = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtMucGiam = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.loaiGiamGiaComboBox = new System.Windows.Forms.ComboBox();
             this.btnXoaHH = new System.Windows.Forms.Button();
             this.btnThemHH = new System.Windows.Forms.Button();
             this.btnUpdateHD = new System.Windows.Forms.Button();
@@ -49,6 +53,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnThanhToan = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnTinhTien = new System.Windows.Forms.Button();
             this.tvTongTien = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvDonHang = new System.Windows.Forms.DataGridView();
@@ -57,6 +63,7 @@
             this.clDonGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clThanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tvSauGiam = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.pnEditHD.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -97,6 +104,7 @@
             this.txtSoHD.Name = "txtSoHD";
             this.txtSoHD.Size = new System.Drawing.Size(143, 22);
             this.txtSoHD.TabIndex = 5;
+            this.txtSoHD.TextChanged += new System.EventHandler(this.txtSoHD_TextChanged);
             // 
             // label1
             // 
@@ -109,6 +117,10 @@
             // 
             // pnEditHD
             // 
+            this.pnEditHD.Controls.Add(this.label9);
+            this.pnEditHD.Controls.Add(this.txtMucGiam);
+            this.pnEditHD.Controls.Add(this.label6);
+            this.pnEditHD.Controls.Add(this.loaiGiamGiaComboBox);
             this.pnEditHD.Controls.Add(this.btnXoaHH);
             this.pnEditHD.Controls.Add(this.btnThemHH);
             this.pnEditHD.Controls.Add(this.btnUpdateHD);
@@ -127,6 +139,44 @@
             this.pnEditHD.Name = "pnEditHD";
             this.pnEditHD.Size = new System.Drawing.Size(600, 215);
             this.pnEditHD.TabIndex = 17;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(349, 54);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(95, 17);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Mức giảm giá:";
+            // 
+            // txtMucGiam
+            // 
+            this.txtMucGiam.Location = new System.Drawing.Point(449, 51);
+            this.txtMucGiam.Name = "txtMucGiam";
+            this.txtMucGiam.Size = new System.Drawing.Size(121, 22);
+            this.txtMucGiam.TabIndex = 31;
+            this.txtMucGiam.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(349, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 17);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Loại giảm giá:";
+            // 
+            // loaiGiamGiaComboBox
+            // 
+            this.loaiGiamGiaComboBox.FormattingEnabled = true;
+            this.loaiGiamGiaComboBox.Items.AddRange(new object[] {
+            "Không giảm giá",
+            "Giảm theo %",
+            "Giảm trực tiếp"});
+            this.loaiGiamGiaComboBox.Location = new System.Drawing.Point(449, 15);
+            this.loaiGiamGiaComboBox.Name = "loaiGiamGiaComboBox";
+            this.loaiGiamGiaComboBox.Size = new System.Drawing.Size(121, 24);
+            this.loaiGiamGiaComboBox.TabIndex = 29;
             // 
             // btnXoaHH
             // 
@@ -257,7 +307,7 @@
             this.btnThanhToan.AutoSize = true;
             this.btnThanhToan.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThanhToan.Location = new System.Drawing.Point(487, 10);
+            this.btnThanhToan.Location = new System.Drawing.Point(486, 39);
             this.btnThanhToan.Name = "btnThanhToan";
             this.btnThanhToan.Size = new System.Drawing.Size(101, 27);
             this.btnThanhToan.TabIndex = 28;
@@ -267,14 +317,42 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.tvSauGiam);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.btnTinhTien);
             this.panel2.Controls.Add(this.btnThanhToan);
             this.panel2.Controls.Add(this.tvTongTien);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(25, 513);
+            this.panel2.Location = new System.Drawing.Point(25, 487);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(600, 43);
+            this.panel2.Size = new System.Drawing.Size(600, 69);
             this.panel2.TabIndex = 18;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(12, 41);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 20);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Sau giảm:";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
+            // 
+            // btnTinhTien
+            // 
+            this.btnTinhTien.AutoSize = true;
+            this.btnTinhTien.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTinhTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTinhTien.Location = new System.Drawing.Point(486, 12);
+            this.btnTinhTien.Name = "btnTinhTien";
+            this.btnTinhTien.Size = new System.Drawing.Size(102, 27);
+            this.btnTinhTien.TabIndex = 33;
+            this.btnTinhTien.Text = "  Tính tiền  ";
+            this.btnTinhTien.UseVisualStyleBackColor = true;
+            this.btnTinhTien.Click += new System.EventHandler(this.button1_Click);
             // 
             // tvTongTien
             // 
@@ -311,7 +389,7 @@
             this.dgvDonHang.ReadOnly = true;
             this.dgvDonHang.RowHeadersWidth = 51;
             this.dgvDonHang.RowTemplate.Height = 24;
-            this.dgvDonHang.Size = new System.Drawing.Size(600, 185);
+            this.dgvDonHang.Size = new System.Drawing.Size(600, 159);
             this.dgvDonHang.TabIndex = 19;
             this.dgvDonHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDonHang_CellClick);
             // 
@@ -363,6 +441,15 @@
             this.clThanhTien.MinimumWidth = 6;
             this.clThanhTien.Name = "clThanhTien";
             this.clThanhTien.ReadOnly = true;
+            // 
+            // tvSauGiam
+            // 
+            this.tvSauGiam.AutoSize = true;
+            this.tvSauGiam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvSauGiam.Location = new System.Drawing.Point(124, 41);
+            this.tvSauGiam.Name = "tvSauGiam";
+            this.tvSauGiam.Size = new System.Drawing.Size(0, 20);
+            this.tvSauGiam.TabIndex = 35;
             // 
             // frmHD
             // 
@@ -419,5 +506,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clDonGia;
         private System.Windows.Forms.DataGridViewTextBoxColumn clSL;
         private System.Windows.Forms.DataGridViewTextBoxColumn clThanhTien;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtMucGiam;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox loaiGiamGiaComboBox;
+        private System.Windows.Forms.Button btnTinhTien;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label tvSauGiam;
     }
 }

@@ -97,6 +97,7 @@
             this.btnSuaTK = new System.Windows.Forms.Button();
             this.btnXemTK = new System.Windows.Forms.Button();
             this.btnThemTK = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.pnNV.SuspendLayout();
@@ -170,6 +171,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnTK);
             this.flowLayoutPanel1.Controls.Add(this.btnHH);
             this.flowLayoutPanel1.Controls.Add(this.btnHD);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 70);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -179,7 +181,7 @@
             // btnNV
             // 
             this.btnNV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNV.Font = new System.Drawing.Font("Myriad Pro Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNV.Image = ((System.Drawing.Image)(resources.GetObject("btnNV.Image")));
             this.btnNV.Location = new System.Drawing.Point(3, 3);
             this.btnNV.Name = "btnNV";
@@ -194,7 +196,7 @@
             // btnNH
             // 
             this.btnNH.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNH.Font = new System.Drawing.Font("Myriad Pro Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNH.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNH.Image = ((System.Drawing.Image)(resources.GetObject("btnNH.Image")));
             this.btnNH.Location = new System.Drawing.Point(3, 59);
             this.btnNH.Name = "btnNH";
@@ -209,7 +211,7 @@
             // 
             this.btnTK.AutoSize = true;
             this.btnTK.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTK.Font = new System.Drawing.Font("Myriad Pro Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTK.Image = ((System.Drawing.Image)(resources.GetObject("btnTK.Image")));
             this.btnTK.Location = new System.Drawing.Point(3, 115);
             this.btnTK.Name = "btnTK";
@@ -224,7 +226,7 @@
             // btnHH
             // 
             this.btnHH.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnHH.Font = new System.Drawing.Font("Myriad Pro Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHH.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHH.Image = ((System.Drawing.Image)(resources.GetObject("btnHH.Image")));
             this.btnHH.Location = new System.Drawing.Point(3, 171);
             this.btnHH.Name = "btnHH";
@@ -237,7 +239,7 @@
             // 
             // btnHD
             // 
-            this.btnHD.Font = new System.Drawing.Font("Myriad Pro Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHD.Image = ((System.Drawing.Image)(resources.GetObject("btnHD.Image")));
             this.btnHD.Location = new System.Drawing.Point(3, 227);
             this.btnHD.Name = "btnHD";
@@ -749,9 +751,9 @@
             // clTongTien
             // 
             this.clTongTien.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clTongTien.DataPropertyName = "TongTien";
-            this.clTongTien.HeaderText = "Tổng tiền";
-            this.clTongTien.MinimumWidth = 6;
+            this.clTongTien.DataPropertyName = "SauGiam";
+            this.clTongTien.HeaderText = "Sau giảm giá";
+            this.clTongTien.MinimumWidth = 2;
             this.clTongTien.Name = "clTongTien";
             this.clTongTien.ReadOnly = true;
             // 
@@ -936,6 +938,19 @@
             this.btnThemTK.UseVisualStyleBackColor = true;
             this.btnThemTK.Click += new System.EventHandler(this.btnThemTK_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(3, 283);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(197, 50);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Thức uống";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1041,6 +1056,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clSoHD;
         private System.Windows.Forms.DataGridViewTextBoxColumn clNgayLap;
         private System.Windows.Forms.DataGridViewTextBoxColumn clTongTien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clSauGiam;
         private System.Windows.Forms.DataGridViewTextBoxColumn clMaNH;
         private System.Windows.Forms.DataGridViewTextBoxColumn clNgayNH;
         private System.Windows.Forms.DataGridViewTextBoxColumn clTongTienNH;
@@ -1051,5 +1067,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clMaHH;
         private System.Windows.Forms.DataGridViewTextBoxColumn clTenHH;
         private System.Windows.Forms.DataGridViewTextBoxColumn clSLHH;
+        private System.Windows.Forms.Button button1;
     }
 }

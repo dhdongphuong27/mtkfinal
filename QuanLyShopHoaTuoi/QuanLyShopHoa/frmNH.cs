@@ -143,14 +143,14 @@ namespace QuanLyShopHoa
                 {
                     if (ChiTietNHDAO.Instance.InsertCTNH(manh, mahh, tenhh, xuatxu, giatien, sl, thanhtien))
                     {
-                        string query = "UPDATE donhang SET SL +=" + sl + " WHERE MaHH = '" + mahh + "'";
+                        string query = "UPDATE donhang SET SL = SL +" + sl + " WHERE MaHH = '" + mahh + "'";
                         DataProvider.Instance.ExcuteNonQuery(query);
                         dgvChiTietNH.DataSource = DataProvider.Instance.ExcuteQuery("SELECT MaHH,TenHH,DonGia,SL,ThanhTien FROM chitietnh WHERE MaNH = " + int.Parse(txtMaNH.Text));
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Kiểm tra lại thông tin nhập hàng!");
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }
@@ -173,21 +173,28 @@ namespace QuanLyShopHoa
         //Tạo đơn nhập hàng 
         private void btnTaoNH_Click(object sender, EventArgs e)
         {
-            int manh = 0;
-            if (DataProvider.Instance.ExcuteScalar("SELECT Max(MaNH) FROM nhaphang") == "")
+            try
             {
-                txtMaNH.Text = "1";
-                manh = int.Parse(txtMaNH.Text);
-                NhapHangDAQ.Instance.InsertNH(manh, DateTime.Today);
+                int manh = 0;
+                if (DataProvider.Instance.ExcuteScalar("SELECT Max(MaNH) FROM nhaphang") == "")
+                {
+                    txtMaNH.Text = "1";
+                    manh = int.Parse(txtMaNH.Text);
+                    NhapHangDAQ.Instance.InsertNH(manh, DateTime.Today);
+                }
+                else
+                {
+                    string tmp = DataProvider.Instance.ExcuteScalar("SELECT Max(MaNH) FROM nhaphang");
+                    manh = int.Parse(tmp) + 1;
+                    txtMaNH.Text = manh.ToString();
+                    txtNgayNH.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                    NhapHangDAQ.Instance.InsertNH(manh, DateTime.Today);
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
-            else
-            {
-                string tmp = DataProvider.Instance.ExcuteScalar("SELECT Max(MaNH) FROM nhaphang");
-                manh = int.Parse(tmp) + 1;
-                txtMaNH.Text = manh.ToString();
-                txtNgayNH.Text = DateTime.Today.ToString("yyyy-MM-dd");
-                NhapHangDAQ.Instance.InsertNH(manh, DateTime.Today);
-            }    
+       
         }
 
         //Trả về mã hàng hóa của hàng hóa được chọn trong chi tiết đơn nhập hàng
